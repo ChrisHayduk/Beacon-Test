@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         self.beaconManager.startMonitoringForRegion(CLBeaconRegion(
             proximityUUID: NSUUID(UUIDString: "48B34241-A2F9-40BF-A4E0-44B337310EFF")!,
             major: 1118, minor: 23964, identifier: "mint"))
-            
+        
         return true
     }
     
