@@ -23,12 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         UIApplication.sharedApplication().registerUserNotificationSettings(
             UIUserNotificationSettings(forTypes: .Alert, categories: nil))
         
-        ESTConfig.setupAppID("beaconTest", andAppToken: "beaconTest")
+        ESTConfig.setupAppID("testbeacon-gkf", andAppToken: "4892df0d76d303fe8179f66686415a7e")
+    
+        ESTCloudManager.enableAnalytics(true)
+        ESTConfig.enableRangingAnalytics(true)
         ESTConfig.enableMonitoringAnalytics(true)
         
         self.beaconManager.startMonitoringForRegion(CLBeaconRegion(
-            proximityUUID: NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!,
-            major: 19886, minor: 23964, identifier: "monitored region"))
+            proximityUUID: NSUUID(UUIDString: "48B34241-A2F9-40BF-A4E0-44B337310EFF")!,
+            major: 1118, minor: 23964, identifier: "mint"))
             
         return true
     }
@@ -41,6 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             "Congratulations! " +
         "Now try to run analytics."
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
+        NSLog("didEnterRegion, will automatically record an enter")
+    }
+    
+    func beaconManager(manager: AnyObject, didExitRegion region: CLBeaconRegion) {
+        let notification = UILocalNotification()
+        notification.alertBody =
+            "You have exited the region."
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+
+        NSLog("didExitRegion, will automatically record an exit")
     }
 
     func applicationWillResignActive(application: UIApplication) {
